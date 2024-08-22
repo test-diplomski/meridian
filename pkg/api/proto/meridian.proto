@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+option go_package = "github.com/c12s/meridian/pkg/api";
+
+package proto;
+
+import "meridian-model.proto";
+
+service Meridian {
+  rpc AddNamespace(AddNamespaceReq) returns (AddNamespaceResp) {}
+  rpc RemoveNamespace(RemoveNamespaceReq) returns (RemoveNamespaceResp) {}
+  rpc AddApp(AddAppReq) returns (AddAppResp) {}
+  rpc RemoveApp(RemoveAppReq) returns (RemoveAppResp) {}
+  rpc GetNamespace(GetNamespaceReq) returns (GetNamespaceResp) {}
+  rpc GetNamespaceHierarchy(GetNamespaceHierarchyReq) returns (GetNamespaceHierarchyResp) {}
+  rpc SetNamespaceResources(SetNamespaceResourcesReq) returns (SetNamespaceResourcesResp) {}
+  rpc SetAppResources(SetAppResourcesReq) returns (SetAppResourcesResp) {}
+}
+
+message AddNamespaceReq {
+    string orgId = 1;
+    string name = 2;
+    map<string, string> labels = 3;
+    map<string, double> quotas = 4;
+    string seccompDefinitionStrategy = 5;
+    SeccompProfile profile = 6;
+    string parentName = 7;
+}
+
+message AddNamespaceResp {}
+
+message RemoveNamespaceReq {
+    string orgId = 1;
+    string name = 2;
+}
+
+message RemoveNamespaceResp {}
+
+message AddAppReq {
+    string orgId = 1;
+    string namespace = 2;
+    string name = 3;
+    map<string, double> quotas = 4;
+    SeccompProfile profile = 5;
+    string seccompDefinitionStrategy = 6;
+}
+
+message AddAppResp {}
+
+message RemoveAppReq {
+    string orgId = 1;
+    string namespace = 2;
+    string name = 3;
+}
+
+message RemoveAppResp {}
+
+message GetNamespaceReq {
+    string orgId = 1;
+    string name = 2;
+}
+
+message GetNamespaceResp {
+    string name = 1;
+    map<string, string> labels = 2;
+    map<string, double> total = 3;
+    map<string, double> available = 4;
+    map<string, double> utilized = 5;
+    SeccompProfile profile = 6;
+}
+
+message GetNamespaceHierarchyReq {
+    string orgId = 1;
+}
+
+message GetNamespaceHierarchyResp {
+    message Namespace {
+        string name = 1;
+        map<string, string> labels = 2;
+        map<string, double> total = 3;
+        map<string, double> available = 4;
+        map<string, double> utilized = 5;
+        SeccompProfile profile = 6;
+    }
+    message App {
+        string name = 1;
+        map<string, double> total = 3;
+        SeccompProfile profile = 6;
+    }
+    Namespace namespace = 1;
+    repeated App apps = 2;
+    repeated GetNamespaceHierarchyResp namespaces = 3;
+}
+
+message SetNamespaceResourcesReq {
+    string orgId = 1;
+    string name = 2;
+    map<string, double> quotas = 4;
+}
+
+message SetNamespaceResourcesResp {}
+
+message SetAppResourcesReq {
+    string orgId = 1;
+    string namespace = 2;
+    string name = 3;
+    map<string, double> quotas = 4;
+}
+
+message SetAppResourcesResp {}

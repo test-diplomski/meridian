@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "github.com/c12s/meridian/pkg/api";
+
+package proto;
+
+message SyscallRule {
+    repeated string names = 1;
+    string action = 2;
+}
+
+message SeccompProfile {
+    string version = 1;
+    string defaultAction = 3;
+    repeated SyscallRule syscalls = 4;
+}
+
+message ApplyAppConfigCommand {
+  string orgId = 1;
+  string namespaceName = 2;
+  string appName = 3;
+  string seccompProfile = 4;
+  map<string, double> quotas = 5;
+  string strategy = 6;
+}
