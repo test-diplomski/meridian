@@ -21,6 +21,15 @@ jobs:
 
         - name: Move gravity to parent directory
           run: mv gravity ../gravity
+
+        - name: Check additional repo
+          uses: actions/checkout@v4
+          with:
+            repository: 'test-diplomski/magnetar'
+            path: 'magnetar'
+
+        - name: Move magnetar to parent directory
+          run: mv magnetar ../magnetar
           
         - name: Set up Go
           uses: actions/setup-go@v5
