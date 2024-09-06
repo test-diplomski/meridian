@@ -39,6 +39,15 @@ jobs:
 
         - name: Move oort to parent directory
           run: mv oort ../oort
+
+        - name: Check additional repo
+          uses: actions/checkout@v4
+          with:
+            repository: 'test-diplomski/pulsar'
+            path: 'pulsar'
+
+        - name: Move pulsar to parent directory
+          run: mv pulsar ../pulsar
           
         - name: Set up Go
           uses: actions/setup-go@v5
