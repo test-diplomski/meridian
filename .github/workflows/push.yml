@@ -67,7 +67,7 @@ jobs:
   # docker:
   #   runs-on: ubuntu-latest
   #   needs: go-ci
-  #   if: github.repository == 'test-diplomski/magnetar'
+  #   if: github.repository == 'test-diplomski/meridian'
 
   #   steps:
   #     - name: Set up QEMU
@@ -88,4 +88,4 @@ jobs:
   #         context: .
   #         file: Dockerfile
   #         push: true
-  #         tags: ${{ secrets.DOCKERHUB_USERNAME }}/magnetar:latest
+  #         tags: ${{ secrets.DOCKERHUB_USERNAME }}/meridian:latest
