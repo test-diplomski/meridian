@@ -30,6 +30,15 @@ jobs:
 
         - name: Move magnetar to parent directory
           run: mv magnetar ../magnetar
+
+        - name: Check additional repo
+          uses: actions/checkout@v4
+          with:
+            repository: 'test-diplomski/oort'
+            path: 'oort'
+
+        - name: Move oort to parent directory
+          run: mv oort ../oort
           
         - name: Set up Go
           uses: actions/setup-go@v5
