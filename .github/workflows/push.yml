@@ -12,6 +12,15 @@ jobs:
       steps:
         - name: Check out main repository
           uses: actions/checkout@v4
+
+        - name: Check additional repo
+          uses: actions/checkout@v4
+          with:
+            repository: 'test-diplomski/gravity'
+            path: 'gravity'
+
+        - name: Move gravity to parent directory
+          run: mv gravity ../gravity
           
         - name: Set up Go
           uses: actions/setup-go@v5
